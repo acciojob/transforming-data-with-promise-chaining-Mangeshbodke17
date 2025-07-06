@@ -1,51 +1,47 @@
-//your JS code here. If required.
 let btn = document.querySelector("#btn");
 let ip = document.querySelector("#ip");
-let output = document.getElementById("output");
+let output = document.querySelector("#output");
 
-function abc(delay, a) {
+function abc(delay, value) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      console.log("Input:", a);
-      output.innerText = "Input: " + a;
+      output.innerText = "Result: " + value;
+      let a = value * 2;
 
-      let b = a * 2;
       setTimeout(() => {
-        console.log("Step 1 (a*2):", b);
-        output.innerText = "Step 1: " + b;
+        output.innerText = "Result: " + a;
+        let b = a - 3;
 
-        let c = b - 3;
         setTimeout(() => {
-          console.log("Step 2 (b-3):", c);
-          output.innerText = "Step 2: " + c;
+          output.innerText = "Result: " + b;
+          let c = b / 2;
 
-          let d = c / 2;
           setTimeout(() => {
-            console.log("Step 3 (c/2):", d);
-            output.innerText = "Step 3: " + d;
+            output.innerText = "Result: " + c;
+            let d = c + 10;
 
-            let e = d + 10;
             setTimeout(() => {
-              console.log("Final Result (d+10):", e);
-              output.innerText = "Final Result: " + e;
-
-              resolve("Process Complete");
+              output.innerText = "Final Result: " + d;
+              resolve(d);
             }, 1000);
 
           }, 1000);
+
         }, 1000);
-      }, 1000);
+
+      }, 2000);
+
     }, delay);
   });
 }
 
 btn.addEventListener("click", function () {
   let input = Number(ip.value);
-  abc(1000, input)
+  abc(2000, input)
     .then((result) => {
-      console.log(result);
+      console.log("Final Answer:", result);
     })
     .catch((err) => {
-      console.log("Error:", err);
+      output.innerText = "Error: " + err;
     });
 });
